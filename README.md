@@ -1,0 +1,1 @@
+[![Quality Gate](https://sonarqube.com/api/badges/gate?key=pro.woz:swarm)](https://sonarcloud.io/dashboard?id=pro.pwoz:swarm)
