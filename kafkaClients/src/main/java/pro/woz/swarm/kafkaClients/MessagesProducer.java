@@ -22,7 +22,7 @@ public class MessagesProducer {
     public MessagesProducer(String topic) {
         topicName = topic;
         Properties config = prepareConfig();
-        producer = new KafkaProducer<String, String>(config);
+        producer = new KafkaProducer<>(config);
         partitionPicker = new RoundRobinPicker(producer.partitionsFor(topicName));
     }
 
@@ -37,7 +37,7 @@ public class MessagesProducer {
     }
 
     public void produceMessage(String message) throws ExecutionException, InterruptedException {
-        ProducerRecord<String, String> m = new ProducerRecord<String, String>(topicName, partitionPicker.pick(), "key", message);
+        ProducerRecord<String, String> m = new ProducerRecord<>(topicName, partitionPicker.pick(), "key", message);
         Future<RecordMetadata> meta = producer.send(m);
         RecordMetadata recordMetadata = meta.get();
         LOGGER.info("Message sent to broker. Topic " + recordMetadata.topic() + ", partition: " + recordMetadata.partition() + ", offset: " + recordMetadata.offset());
