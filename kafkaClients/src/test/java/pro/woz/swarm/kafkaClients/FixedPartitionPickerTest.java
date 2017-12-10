@@ -4,6 +4,7 @@ import org.apache.kafka.common.PartitionInfo;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
+import pro.woz.swarm.clients.producers.FixedPartitionPicker;
 
 import java.util.ArrayList;
 import java.util.Collections;

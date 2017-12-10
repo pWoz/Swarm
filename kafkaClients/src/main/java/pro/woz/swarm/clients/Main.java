@@ -1,4 +1,6 @@
-package pro.woz.swarm.kafkaClients;
+package pro.woz.swarm.clients;
+
+import pro.woz.swarm.clients.producers.MessagesProducer;
 
 import java.util.concurrent.ExecutionException;
 

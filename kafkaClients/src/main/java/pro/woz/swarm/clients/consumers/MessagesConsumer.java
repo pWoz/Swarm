@@ -1,4 +1,4 @@
-package pro.woz.swarm.kafkaClients;
+package pro.woz.swarm.clients.consumers;
 
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;

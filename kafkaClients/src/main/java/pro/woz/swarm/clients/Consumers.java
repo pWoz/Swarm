@@ -1,4 +1,6 @@
-package pro.woz.swarm.kafkaClients;
+package pro.woz.swarm.clients;
+
+import pro.woz.swarm.clients.consumers.MessagesConsumer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,6 +35,7 @@ public class Consumers {
                     executor.awaitTermination(5000, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    Thread.currentThread().interrupt();
                 }
             }
         });

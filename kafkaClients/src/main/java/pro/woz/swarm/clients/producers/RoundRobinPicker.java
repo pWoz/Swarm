@@ -1,4 +1,4 @@
-package pro.woz.swarm.kafkaClients;
+package pro.woz.swarm.clients.producers;
 
 import org.apache.kafka.common.PartitionInfo;
 import org.apache.logging.log4j.LogManager;
@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Picks the partition from given partitions list that will be used while message production.
  */
-public class RoundRobinPicker implements PartitionPicker {
+public class    RoundRobinPicker implements PartitionPicker {
 
     public static final Logger LOGGER = LogManager.getLogger(RoundRobinPicker.class.getName());
 

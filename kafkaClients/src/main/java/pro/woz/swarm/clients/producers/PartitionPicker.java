@@ -1,4 +1,4 @@
-package pro.woz.swarm.kafkaClients;
+package pro.woz.swarm.clients.producers;
 
 public interface PartitionPicker {
 

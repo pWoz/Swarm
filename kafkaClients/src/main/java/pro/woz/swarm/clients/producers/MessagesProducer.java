@@ -1,4 +1,4 @@
-package pro.woz.swarm.kafkaClients;
+package pro.woz.swarm.clients.producers;
 
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
