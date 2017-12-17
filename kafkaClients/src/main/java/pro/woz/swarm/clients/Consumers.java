@@ -1,5 +1,7 @@
 package pro.woz.swarm.clients;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import pro.woz.swarm.clients.consumers.MessagesConsumer;
 
 import java.util.ArrayList;
@@ -10,6 +12,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class Consumers {
+
+    public static final Logger LOGGER = LogManager.getLogger(Consumers.class.getName());
 
     public static void main(String[] args) {
         int numConsumers = 3;
@@ -34,7 +38,7 @@ public class Consumers {
                 try {
                     executor.awaitTermination(5000, TimeUnit.MILLISECONDS);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    LOGGER.error(e);
                     Thread.currentThread().interrupt();
                 }
             }
