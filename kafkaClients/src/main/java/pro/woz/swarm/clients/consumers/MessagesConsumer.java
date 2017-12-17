@@ -4,20 +4,20 @@ import org.apache.kafka.clients.consumer.Consumer;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.common.errors.WakeupException;
+import pro.woz.swarm.clients.EventConsumer;
 
 import java.util.*;
 
 public class MessagesConsumer implements Runnable {
 
     private final Consumer<String, String> consumer;
-    private final List<String> topics;
+    private List<EventConsumer> eventConsumers;
     private final int id;
 
-    public MessagesConsumer(Consumer<String, String> kafkaConsumer, int id,
-                            List<String> topics) {
+    public MessagesConsumer(Consumer<String, String> kafkaConsumer, int id) {
         consumer = kafkaConsumer;
-        this.topics = topics;
         this.id = id;
+        eventConsumers = Collections.emptyList();
     }
 
     @Override
@@ -25,6 +25,7 @@ public class MessagesConsumer implements Runnable {
         try {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Long.MAX_VALUE);
+                notifyCosumers(records);
                 for (ConsumerRecord<String, String> record : records) {
                     Map<String, Object> data = new HashMap<>();
                     data.put("partition", record.partition());
@@ -44,4 +45,13 @@ public class MessagesConsumer implements Runnable {
         consumer.wakeup();
     }
 
+    private void notifyCosumers(ConsumerRecords<String, String> records) {
+        for (EventConsumer eventConsumer : eventConsumers) {
+            eventConsumer.consume(records);
+        }
+    }
+
+    public void subscribeConsumer(EventConsumer consumer) {
+        eventConsumers.add(consumer);
+    }
 }

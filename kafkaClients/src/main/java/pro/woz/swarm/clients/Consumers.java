@@ -29,7 +29,7 @@ public class Consumers {
             Properties config = prepareConfig();
             Consumer<String, String> kafkaConsumer = new KafkaConsumer<>(config);
             kafkaConsumer.subscribe(topics);
-            MessagesConsumer consumer = new MessagesConsumer(kafkaConsumer, i, topics);
+            MessagesConsumer consumer = new MessagesConsumer(kafkaConsumer, i);
             consumers.add(consumer);
             executor.submit(consumer);
         }
