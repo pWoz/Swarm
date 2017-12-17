@@ -10,7 +10,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 /**
- * Sends messages to kafka, always to the same partition
+ * Sends messages to kafka in round robin manner regarding partitions.
+ *
+ * @author pwozniak
  */
 public class SimpleMessagesProducer {
 
