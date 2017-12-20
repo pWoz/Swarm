@@ -17,7 +17,7 @@ public class MessagesConsumer implements Runnable {
     public MessagesConsumer(Consumer<String, String> kafkaConsumer, int id) {
         consumer = kafkaConsumer;
         this.id = id;
-        eventConsumers = Collections.emptyList();
+        eventConsumers = new ArrayList<>();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class MessagesConsumer implements Runnable {
         try {
             while (true) {
                 ConsumerRecords<String, String> records = consumer.poll(Long.MAX_VALUE);
-                notifyCosumers(records);
+                notifyConsumers(records);
                 for (ConsumerRecord<String, String> record : records) {
                     Map<String, Object> data = new HashMap<>();
                     data.put("partition", record.partition());
@@ -45,7 +45,7 @@ public class MessagesConsumer implements Runnable {
         consumer.wakeup();
     }
 
-    private void notifyCosumers(ConsumerRecords<String, String> records) {
+    private void notifyConsumers(ConsumerRecords<String, String> records) {
         for (EventConsumer eventConsumer : eventConsumers) {
             eventConsumer.consume(records);
         }
